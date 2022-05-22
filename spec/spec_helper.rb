@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "pry"
+
 require "rspec/context_helper"
 
 RSpec.configure do |config|
