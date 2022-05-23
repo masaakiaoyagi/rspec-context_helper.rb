@@ -47,36 +47,16 @@ RSpec.describe RSpec::ContextHelper do
 
   describe ".example_with" do
     describe "description" do
-      example_with do
-        expect(description).to eq ""
-      end
-
-      example_with "message" do
-        expect(description).to eq "message"
-      end
-
-      example_with a: "1" do
-        expect(description).to eq %(when a is "1")
-      end
-
-      example_with a: "1", b: "2" do
-        expect(description).to eq %(when a is "1" and b is "2")
-      end
-
-      example_with a: "1", b: "2", c: "3" do
-        expect(description).to eq %(when a is "1", b is "2" and c is "3")
-      end
+      example_with                         { expect(description).to eq "" }
+      example_with("message")              { expect(description).to eq "message" }
+      example_with(a: "1")                 { expect(description).to eq %(when a is "1") }
+      example_with(a: "1", b: "2")         { expect(description).to eq %(when a is "1" and b is "2") }
+      example_with(a: "1", b: "2", c: "3") { expect(description).to eq %(when a is "1", b is "2" and c is "3") }
     end
 
-    example_with do
-    end
-
-    example_with "message" do
-    end
-
-    example_with a: "1" do
-      expect(a).to eq "1"
-    end
+    example_with            {}
+    example_with("message") {}
+    example_with(a: "1")    { expect(a).to eq "1" }
 
     example_with "message", a: -> { b }, b: "2", c: -> { -> {} } do
       expect(a).to eq "2"
