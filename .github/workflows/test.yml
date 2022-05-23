@@ -1,15 +1,14 @@
-name: Ruby
+name: test
 
 on:
   push:
     branches:
       - master
-      - actions
 
   pull_request:
 
 jobs:
-  test:
+  rspec:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
