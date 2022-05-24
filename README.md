@@ -18,6 +18,7 @@ end
 ```
 
 That's basically all there is to it, but I think it will be more potent when used with a custom matcher.
+
 Also, [the Crystal version](https://github.com/masaakiaoyagi/spectator-context_helper.cr) is available.
 
 ## Installation
