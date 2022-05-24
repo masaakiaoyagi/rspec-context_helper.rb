@@ -3,38 +3,49 @@
 [![test](https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml/badge.svg)](https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/context_helper`. To experiment with that code, run `bin/console` for an interactive prompt.
+This helper library is for writing tests concisely.
 
-TODO: Delete this and the text above, and describe your gem
+For example,
+```ruby
+example_with("value is zero", value: 0) { expect(value).to eq 0 }
+```
+Above is the same as below.
+```ruby
+context "value is zero" do
+  let(:value) { 0 }
+  it { expect(value).to eq 0 }
+end
+```
+
+That's basically all there is to it, but I think it will be more potent when used with a custom matcher.
+Also, [the Crystal version](https://github.com/masaakiaoyagi/spectator-context_helper.cr) is available.
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+1. Add the dependency to your `Gemfile`:
 
-    $ bundle add rspec-context_helper
+    ```ruby
+    group :test do
+      gem "rspec-context_helper"
+    end
+    ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install rspec-context_helper
+1. Run `bundle install`
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "rspec-context_helper"
+```
+
+See [spec](https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspec/context_helper_spec.rb) how to write a test.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Run tests
+```sh
+$ docker compose run --rm 3.1 bundle exec rspec
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rspec-context_helper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rspec-context_helper/blob/master/CODE_OF_CONDUCT.md).
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the RSpec::ContextHelper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/rspec-context_helper/blob/master/CODE_OF_CONDUCT.md).
+## See also
+* [RSpec](https://github.com/rspec/rspec-metagem)
