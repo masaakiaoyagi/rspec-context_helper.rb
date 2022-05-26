@@ -5,7 +5,7 @@
 
 This helper library is for writing tests concisely.
 
-For example,
+For example, you can write as follows.
 ```ruby
 example_with("value is zero", value: 0) { expect(value).to eq 0 }
 ```
@@ -18,8 +18,6 @@ end
 ```
 
 That's basically all there is to it, but I think it will be more potent when used with a custom matcher.
-
-Also, [the Crystal version](https://github.com/masaakiaoyagi/spectator-context_helper.cr) is available.
 
 ## Installation
 
@@ -50,3 +48,4 @@ $ docker compose run --rm 3.1 bundle exec rspec
 
 ## See also
 * [RSpec](https://github.com/rspec/rspec-metagem)
+* [Crystal version](https://github.com/masaakiaoyagi/spectator-context_helper.cr)
