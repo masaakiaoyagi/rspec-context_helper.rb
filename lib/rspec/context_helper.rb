@@ -7,6 +7,12 @@ require_relative "context_helper/version"
 module RSpec
   module ContextHelper
     module DSL
+      def example_with(description = nil, metadata: nil, shared: nil, **values, &block)
+        context_with(description, metadata: metadata, shared: shared, **values) do
+          example { |*args| instance_exec(*args, &block) }
+        end
+      end
+
       def context_with(description = nil, metadata: nil, shared: nil, **values, &block)
         shared = Utils.to_h(shared)
         description ||= Utils.to_description(metadata, shared, values)
@@ -21,12 +27,6 @@ module RSpec
             end
           end
           instance_exec(&block)
-        end
-      end
-
-      def example_with(description = nil, metadata: nil, shared: nil, **values, &block)
-        context_with(description, metadata: metadata, shared: shared, **values) do
-          example { |*args| instance_exec(*args, &block) }
         end
       end
     end
