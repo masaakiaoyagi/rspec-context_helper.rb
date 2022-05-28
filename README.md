@@ -17,7 +17,7 @@ context "value is zero" do
 end
 ```
 
-That's basically all there is to it, but I think it will be more potent when used with a custom matcher.
+That's basically all there is to it, but I think it will be more potent when used with a [custom matcher](https://relishapp.com/rspec/rspec-expectations/v/3-11/docs/custom-matchers).
 
 ## Installation
 
