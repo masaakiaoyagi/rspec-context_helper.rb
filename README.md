@@ -5,7 +5,7 @@
 
 This helper library is for writing tests concisely.
 
-For example, you can write as follows.
+You can write a test as follows.
 ```ruby
 example_with("value is zero", value: 0) { expect(value).to eq 0 }
 ```
@@ -18,6 +18,38 @@ end
 ```
 
 That's basically all there is to it, but I think it will be more potent when used with a [custom matcher](https://relishapp.com/rspec/rspec-expectations/v/3-11/docs/custom-matchers).
+
+<details>
+<summary>
+Example of ActiveModel validation tests using a custom matcher
+</summary>
+<div>
+
+```ruby
+class Account
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+  attribute :name, :string
+  validates :name, presence: true, length: { in: 3..20 }, format: { with: /\A[0-9a-zA-Z]*\z/, message: "alphanumeric characters only" }
+end
+
+let(:account) { Account.new(name: name) }
+before do
+  account.valid?
+end
+
+# There is no "have_error" matcher, so you need to create one.
+example_with(name: " ")      { expect(account).to have_error.on(:name).with(:blank) }
+example_with(name: "a" * 2)  { expect(account).to have_error.on(:name).with(:length, count: 3) }
+example_with(name: "a" * 3)  { expect(account).not_to have_error }
+example_with(name: "a" * 20) { expect(account).not_to have_error }
+example_with(name: "a" * 21) { expect(account).to have_error.on(:name).with(:length, count: 20) }
+example_with(name: "a0a")    { expect(account).not_to have_error }
+example_with(name: "a a")    { expect(account).to have_error.on(:name).with(:invalid) }
+example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alphanumeric characters only") }
+```
+</div>
+</details>
 
 ## Installation
 
