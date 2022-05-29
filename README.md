@@ -40,10 +40,10 @@ end
 
 # There is no "have_error" matcher, so you need to create one.
 example_with(name: " ")      { expect(account).to have_error.on(:name).with(:blank) }
-example_with(name: "a" * 2)  { expect(account).to have_error.on(:name).with(:length, count: 3) }
+example_with(name: "a" * 2)  { expect(account).to have_error.on(:name).with(:too_short, count: 3) }
 example_with(name: "a" * 3)  { expect(account).not_to have_error }
 example_with(name: "a" * 20) { expect(account).not_to have_error }
-example_with(name: "a" * 21) { expect(account).to have_error.on(:name).with(:length, count: 20) }
+example_with(name: "a" * 21) { expect(account).to have_error.on(:name).with(:too_long, count: 20) }
 example_with(name: "a0a")    { expect(account).not_to have_error }
 example_with(name: "a a")    { expect(account).to have_error.on(:name).with(:invalid) }
 example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alphanumeric characters only") }
