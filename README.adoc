@@ -52,11 +52,11 @@ example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alp
 
 . Add the dependency to your `Gemfile`:
 
-    ```ruby
+```ruby
     group :test do
       gem "rspec-context_helper"
     end
-    ```
+```
 
 . Run `bundle install`
 
