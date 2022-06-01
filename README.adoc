@@ -1,8 +1,8 @@
 # RSpec::ContextHelper
 
-[![stability-wip](https://img.shields.io/badge/stability-wip-lightgrey.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#work-in-progress)
-[![test](https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml/badge.svg)](https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#work-in-progress[image:https://img.shields.io/badge/stability-wip-lightgrey.svg[stability-wip]]
+https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml[image:https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml/badge.svg[test]]
+https://opensource.org/licenses/MIT[image:https://img.shields.io/badge/License-MIT-yellow.svg[License: MIT]]
 
 This helper library is for writing tests concisely.
 
@@ -18,14 +18,11 @@ context "value is zero" do
 end
 ```
 
-That's basically all there is to it, but I think it will be more potent when used with a [custom matcher](https://relishapp.com/rspec/rspec-expectations/v/3-11/docs/custom-matchers).
+That's basically all there is to it, but I think it will be more potent when used with a https://relishapp.com/rspec/rspec-expectations/v/3-11/docs/custom-matchers[custom matcher].
 
-<details>
-<summary>
-Example of ActiveModel validation tests using a custom matcher
-</summary>
-<div>
-
+.Example of ActiveModel validation tests using a custom matcher
+[%collapsible]
+====
 ```ruby
 class Account
   include ActiveModel::Model
@@ -49,12 +46,11 @@ example_with(name: "a0a")    { expect(account).not_to have_error }
 example_with(name: "a a")    { expect(account).to have_error.on(:name).with(:invalid) }
 example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alphanumeric characters only") }
 ```
-</div>
-</details>
+====
 
 ## Installation
 
-1. Add the dependency to your `Gemfile`:
+. Add the dependency to your `Gemfile`:
 
     ```ruby
     group :test do
@@ -62,7 +58,7 @@ example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alp
     end
     ```
 
-1. Run `bundle install`
+. Run `bundle install`
 
 ## Usage
 
@@ -70,7 +66,7 @@ example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alp
 require "rspec-context_helper"
 ```
 
-See [spec](https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspec/context_helper_spec.rb) how to write a test.
+See https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspec/context_helper_spec.rb[spec] how to write a test.
 
 ## Development
 
@@ -80,5 +76,5 @@ $ docker compose run --rm 3.1 bundle exec rspec
 ```
 
 ## See also
-* [RSpec](https://github.com/rspec/rspec-metagem)
-* [Crystal version](https://github.com/masaakiaoyagi/spectator-context_helper.cr)
+* https://github.com/rspec/rspec-metagem[RSpec]
+* https://github.com/masaakiaoyagi/spectator-context_helper.cr[Crystal version]
