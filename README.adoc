@@ -68,6 +68,155 @@ require "rspec-context_helper"
 
 See https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspec/context_helper_spec.rb[spec] how to write a test.
 
+## API
+
+### `example_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
+Defines an exmaple with metadata, shared context and local variables.
+
+#### parameters
+<<context_with-parameters, same as context_with's one>>
+
+#### examples
+.`example_with("description") { expect(true).to eq true }`
+[%collapsible]
+====
+same as
+```ruby
+contest "description" do
+  it { expect(true).to eq true }
+end
+```
+====
+
+.`example_with(value: 1) { expect(value).to eq 1 }`
+[%collapsible]
+====
+same as
+```ruby
+contest "when value is 1" do
+  let(:value) { 1 }
+  it { expect(value).to eq 1 }
+end
+```
+====
+
+.`example_with(_shared: "logged in") { expect(logged_in).to eq true }`
+[%collapsible]
+====
+same as
+```ruby
+contest "when logged in" do
+  include_context "logged in"
+  it { expect(logged_in).to eq true }
+end
+```
+====
+
+.`example_with(_meta: :bar) { |e| expect(e.metadata[:bar]).to eq true }`
+[%collapsible]
+====
+same as
+```ruby
+contest "", :bar do
+  it { |e| expect(e.metadata[:bar]).to eq true }
+end
+```
+====
+
+.`example_with(_meta: { foo: 1 }) { |e| expect(e.metadata[:foo]).to eq 1 }`
+[%collapsible]
+====
+same as
+```ruby
+contest "", foo: 1 do
+  it { |e| expect(e.metadata[:foo]).to eq 1 }
+end
+```
+====
+
+### `context_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
+Defines an example group with metadata, shared context and local variables.
+
+#### [[context_with-parameters]]parameters
+.description: context description
+[%collapsible]
+====
+If description is omitted, it is automatically generated from other parameters.
+====
+
+._meta: https://relishapp.com/rspec/rspec-core/v/3-11/docs/metadata/user-defined-metadata[metadata] to be defined
+[%collapsible]
+====
+====
+
+._shared: https://relishapp.com/rspec/rspec-core/v/3-11/docs/example-groups/shared-context[shared context] to be included
+[%collapsible]
+====
+====
+
+.values: helper methods to be defined by https://relishapp.com/rspec/rspec-core/v/3-11/docs/helper-methods/let-and-let[let]
+[%collapsible]
+====
+====
+
+#### examples
+.`context_with("description") { ... }`
+[%collapsible]
+====
+same as
+```ruby
+contest "description" do
+  ...
+end
+```
+====
+
+.`context_with(value: 1) { ... }`
+[%collapsible]
+====
+same as
+```ruby
+contest "when value is 1" do
+  let(:value) { 1 }
+  ...
+end
+```
+====
+
+.`context_with(_shared: "logged in") { ... }`
+[%collapsible]
+====
+same as
+```ruby
+contest "when logged in" do
+  include_context "logged in"
+  ...
+end
+```
+====
+
+.`context_with(_meta: :bar) { ... }`
+[%collapsible]
+====
+same as
+```ruby
+contest "", :bar do
+  ...
+end
+```
+====
+
+.`context_with(_meta: { foo: 1 }) { ... }`
+[%collapsible]
+====
+same as
+```ruby
+contest "", foo: 1 do
+  ...
+end
+```
+====
+
 ## Development
 
 ### Run tests
