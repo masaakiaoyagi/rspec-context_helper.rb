@@ -14,12 +14,14 @@ module RSpec
       end
 
       def context_with(description = nil, _meta: nil, _shared: nil, **values, &block)
+        tags, metadata = Utils.split_options(_meta)
         shared = Utils.to_h(_shared)
-        description ||= Utils.to_description(_meta, shared, values)
+        description ||= Utils.to_description(tags, metadata, shared, values)
 
-        context description, *_meta do
-          shared.each do |name, args|
-            include_context name, *args
+        context description, *tags, **metadata do
+          shared.each do |name, _args|
+            args, opts = Utils.split_options(_args)
+            include_context name, *args, **opts
           end
           values.each do |key, value|
             let(key) do
@@ -33,33 +35,46 @@ module RSpec
 
     module Utils
       class << self
+        def split_options(value)
+          if value.is_a?(::Hash)
+            [[], value]
+          else
+            value = Array(value)
+            value.last.is_a?(::Hash) ? [value, value.pop] : [value, {}]
+          end
+        end
+
         def to_h(value)
           case value
           when nil
             {}
-          when Array
+          when ::Array
             *rest, last = value
-            if last.is_a?(Hash)
+            if last.is_a?(::Hash)
               rest.map { |i| [i, nil] }.to_h.merge(last)
             else
               value.map { |i| [i, nil] }.to_h
             end
-          when Hash
+          when ::Hash
             value
           else
             { value => nil }
           end
         end
 
-        def to_description(metadata, shared, values)
-          to_sentence(to_metadata_words(metadata) + to_shared_words(shared) + to_values_words(values)).then do |desc|
+        def to_description(tags, metadata, shared, values)
+          to_sentence(to_tag_words(tags) + to_metadata_words(metadata) + to_shared_words(shared) + to_values_words(values)).then do |desc|
             desc.empty? ? desc : "when #{desc}"
           end
         end
 
-        # TODO: whether to include metadata in the message
+        # TODO: whether to include tag in the description
+        private def to_tag_words(tags)
+          []
+        end
+
+        # TODO: whether to include metadata in the description
         private def to_metadata_words(metadata)
-          # to_h(metadata).map { |k, v| k }
           []
         end
 
