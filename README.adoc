@@ -111,9 +111,9 @@ _meta: [:foo, bar: 2]
 [%collapsible]
 =====
 ```ruby
-`example_with(foo: bar, bar: 2) { expect(foo).to eq 2 }`
+example_with(foo: bar, bar: 2) { expect(foo).to eq 2 }
 # => undefined local variable or method `bar'
-`example_with(foo: -> { bar }, bar: 2) { expect(foo).to eq 2 }`
+example_with(foo: -> { bar }, bar: 2) { expect(foo).to eq 2 }
 # => OK
 ```
 =====
@@ -122,9 +122,9 @@ _meta: [:foo, bar: 2]
 [%collapsible]
 =====
 ```ruby
-`example_with(foo: -> { "proc" }) { expect(foo).to be_an_instance_of Proc }`
+example_with(foo: -> { "proc" }) { expect(foo).to be_an_instance_of Proc }
 # => NG
-`example_with(foo: -> { -> { "proc" } }) { expect(foo).to be_an_instance_of Proc }`
+example_with(foo: -> { -> { "proc" } }) { expect(foo).to be_an_instance_of Proc }
 # => OK
 ```
 =====
