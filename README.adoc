@@ -125,9 +125,9 @@ example_with(foo: -> { bar }, bar: 2) { expect(foo).to eq 2 }
 [%collapsible]
 =====
 ```ruby
-example_with(foo: -> { "proc" }) { expect(foo).to be_an_instance_of Proc }
-# => NG
-example_with(foo: -> { -> { "proc" } }) { expect(foo).to be_an_instance_of Proc }
+example_with(foo: -> { "proc" }) { expect(foo.call).to eq "proc" }
+# => undefined method `call' for "proc":String
+example_with(foo: -> { -> { "proc" } }) { expect(foo.call).to eq "proc" }
 # => OK
 ```
 =====
