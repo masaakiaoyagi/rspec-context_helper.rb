@@ -74,13 +74,13 @@ See https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspe
 Defines an exmaple with metadata, shared context and local variables.
 
 ##### example_with-parameters parameters
-.description: context description
+.`description`: context description
 [%collapsible]
 ====
 If description is omitted, it is automatically generated from other parameters.
 ====
 
-._meta: https://relishapp.com/rspec/rspec-core/v/3-11/docs/metadata/user-defined-metadata[metadata] to be defined
+.`_meta`: https://relishapp.com/rspec/rspec-core/v/3-11/docs/metadata/user-defined-metadata[metadata] to be defined
 [%collapsible]
 ====
 .examples
@@ -92,7 +92,7 @@ _meta: [:foo, bar: 2]
 ```
 ====
 
-._shared: https://relishapp.com/rspec/rspec-core/v/3-11/docs/example-groups/shared-context[shared context] to be included
+.`_shared`: https://relishapp.com/rspec/rspec-core/v/3-11/docs/example-groups/shared-context[shared context] to be included
 [%collapsible]
 ====
 .examples
@@ -104,7 +104,7 @@ _meta: [:foo, bar: 2]
 ```
 ====
 
-.values: helper methods to be defined by https://relishapp.com/rspec/rspec-core/v/3-11/docs/helper-methods/let-and-let[let]
+.`values`: helper methods to be defined by https://relishapp.com/rspec/rspec-core/v/3-11/docs/helper-methods/let-and-let[let]
 [%collapsible]
 ====
 .You need to use a proc in order to call helper methods in the example context.
@@ -200,7 +200,7 @@ end
 Defines an example group with metadata, shared context and local variables.
 
 ##### parameters
-same as example_with's one
+same as `example_with`'s one
 
 ##### examples
 .`context_with("description") { ... }`
