@@ -68,12 +68,12 @@ require "rspec-context_helper"
 
 See https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspec/context_helper_spec.rb[spec] how to write a test.
 
-## API
+### API
 
-### `example_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
+#### `example_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
 Defines an exmaple with metadata, shared context and local variables.
 
-#### [[example_with-parameters]]parameters
+##### example_with-parameters parameters
 .description: context description
 [%collapsible]
 ====
@@ -138,7 +138,7 @@ foo: -> { -> { "proc" } }
 ```
 ====
 
-#### examples
+##### examples
 .`example_with("description") { expect(true).to eq true }`
 [%collapsible]
 ====
@@ -196,13 +196,13 @@ end
 ```
 ====
 
-### `context_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
+#### `context_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
 Defines an example group with metadata, shared context and local variables.
 
-#### parameters
-<<example_with-parameters, same as example_with's one>>
+##### parameters
+same as example_with's one
 
-#### examples
+##### examples
 .`context_with("description") { ... }`
 [%collapsible]
 ====
