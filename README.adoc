@@ -97,10 +97,13 @@ _meta: [:foo, bar: 2]
 ====
 .examples
 ```ruby
-:foo
-[:foo, :bar]
-{ foo: "1" }
-[:foo, bar: 2]
+_shared: :foo
+_shared: [:foo, :bar]
+_shared: { foo: "1" }
+_shared: [:foo, bar: 2]
+_shared: { foo: [:arg1, :arg2] }
+_shared: { foo: { opt1: :bar } }
+_shared: { foo: [:arg1, opt1: :bar] }
 ```
 ====
 
@@ -200,7 +203,7 @@ end
 Defines an example group with metadata, shared context and local variables.
 
 ##### parameters
-same as `example_with`'s one
+same as `example_with`
 
 ##### examples
 .`context_with("description") { ... }`
