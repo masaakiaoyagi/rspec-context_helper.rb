@@ -73,7 +73,7 @@ See https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspe
 #### `example_with(description = nil, _meta: nil, _shared: nil, **values, &block)`
 Defines an exmaple with metadata, shared context and local variables.
 
-##### example_with-parameters parameters
+##### parameters
 .`description`: context description
 [%collapsible]
 ====
