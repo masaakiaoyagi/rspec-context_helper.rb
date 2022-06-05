@@ -19,7 +19,7 @@ RSpec::Matchers.define :have_metadata do |expected|
   end
 end
 
-RSpec::Matchers.define :have_included do |expected_name|
+RSpec::Matchers.define :include_context do |expected_name|
   match do |example|
     example.included_contexts.any? do |actual_name, actual_args, actual_opts|
       next false unless actual_name == expected_name
@@ -39,7 +39,7 @@ end
 RSpec.describe RSpec::ContextHelper do
   let(:description) { self.class.description }
 
-  # for have_included matcher
+  # for include_context matcher
   let(:included_contexts) { [] }
   shared_context :s1 do |*args, **opts|
     before { included_contexts << [:s1, args, opts] }
@@ -80,17 +80,17 @@ RSpec.describe RSpec::ContextHelper do
     end
 
     describe "shared context" do
-      example_with(_shared: :s1)                  { expect(self).to have_included(:s1).with }
-      example_with(_shared: :s1)                  { expect(self).not_to have_included(:s2) }
-      example_with(_shared: [:s1, :s2])           { expect(self).to have_included(:s1).with }
-      example_with(_shared: [:s1, :s2])           { expect(self).to have_included(:s2).with }
-      example_with(_shared: { s1: "3" })          { expect(self).to have_included(:s1).with("3") }
-      example_with(_shared: [:s1, s2: 3])         { expect(self).to have_included(:s1).with }
-      example_with(_shared: [:s1, s2: 3])         { expect(self).to have_included(:s2).with(3) }
-      example_with(_shared: { s1: [] })           { expect(self).to have_included(:s1).with }
-      example_with(_shared: { s1: [:a1, :a2] })   { expect(self).to have_included(:s1).with(:a1, :a2) }
-      example_with(_shared: { s1: { a1: 1 } })    { expect(self).to have_included(:s1).with(a1: 1) }
-      example_with(_shared: { s1: [:a1, a2: 2] }) { expect(self).to have_included(:s1).with(:a1, a2: 2) }
+      example_with(_shared: :s1)                  { expect(self).to include_context(:s1).with }
+      example_with(_shared: :s1)                  { expect(self).not_to include_context(:s2) }
+      example_with(_shared: [:s1, :s2])           { expect(self).to include_context(:s1).with }
+      example_with(_shared: [:s1, :s2])           { expect(self).to include_context(:s2).with }
+      example_with(_shared: { s1: "3" })          { expect(self).to include_context(:s1).with("3") }
+      example_with(_shared: [:s1, s2: 3])         { expect(self).to include_context(:s1).with }
+      example_with(_shared: [:s1, s2: 3])         { expect(self).to include_context(:s2).with(3) }
+      example_with(_shared: { s1: [] })           { expect(self).to include_context(:s1).with }
+      example_with(_shared: { s1: [:a1, :a2] })   { expect(self).to include_context(:s1).with(:a1, :a2) }
+      example_with(_shared: { s1: { a1: 1 } })    { expect(self).to include_context(:s1).with(a1: 1) }
+      example_with(_shared: { s1: [:a1, a2: 2] }) { expect(self).to include_context(:s1).with(:a1, a2: 2) }
     end
   end
 
@@ -166,38 +166,38 @@ RSpec.describe RSpec::ContextHelper do
 
     describe "shared context" do
       context_with _shared: :s1 do
-        example { expect(self).to have_included(:s1).with }
-        example { expect(self).not_to have_included(:s2) }
+        example { expect(self).to include_context(:s1).with }
+        example { expect(self).not_to include_context(:s2) }
       end
 
       context_with _shared: [:s1, :s2] do
-        example { expect(self).to have_included(:s1).with }
-        example { expect(self).to have_included(:s2).with }
+        example { expect(self).to include_context(:s1).with }
+        example { expect(self).to include_context(:s2).with }
       end
 
       context_with _shared: { s1: "3" } do
-        example { expect(self).to have_included(:s1).with("3") }
+        example { expect(self).to include_context(:s1).with("3") }
       end
 
       context_with _shared: [:s1, s2: 3] do
-        example { expect(self).to have_included(:s1).with }
-        example { expect(self).to have_included(:s2).with(3) }
+        example { expect(self).to include_context(:s1).with }
+        example { expect(self).to include_context(:s2).with(3) }
       end
 
       context_with _shared: { s1: [] } do
-        example { expect(self).to have_included(:s1).with }
+        example { expect(self).to include_context(:s1).with }
       end
 
       context_with _shared: { s1: [:a1, :a2] } do
-        example { expect(self).to have_included(:s1).with(:a1, :a2) }
+        example { expect(self).to include_context(:s1).with(:a1, :a2) }
       end
 
       context_with _shared: { s1: { a1: 1 } } do
-        example { expect(self).to have_included(:s1).with(a1: 1) }
+        example { expect(self).to include_context(:s1).with(a1: 1) }
       end
 
       context_with _shared: { s1: [:a1, a2: 2] } do
-        example { expect(self).to have_included(:s1).with(:a1, a2: 2) }
+        example { expect(self).to include_context(:s1).with(:a1, a2: 2) }
       end
     end
   end
