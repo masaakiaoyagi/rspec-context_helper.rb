@@ -148,7 +148,7 @@ foo: -> { -> { "proc" } }
 ====
 same as
 ```ruby
-contest "description" do
+context "description" do
   it { expect(true).to eq true }
 end
 ```
@@ -159,7 +159,7 @@ end
 ====
 same as
 ```ruby
-contest "when value is 1" do
+context "when value is 1" do
   let(:value) { 1 }
   it { expect(value).to eq 1 }
 end
@@ -171,7 +171,7 @@ end
 ====
 same as
 ```ruby
-contest "when logged in" do
+context "when logged in" do
   include_context "logged in"
   it { expect(logged_in).to eq true }
 end
@@ -183,7 +183,7 @@ end
 ====
 same as
 ```ruby
-contest "", :bar do
+context "", :bar do
   it { |e| expect(e.metadata[:bar]).to eq true }
 end
 ```
@@ -194,7 +194,7 @@ end
 ====
 same as
 ```ruby
-contest "", foo: 1 do
+context "", foo: 1 do
   it { |e| expect(e.metadata[:foo]).to eq 1 }
 end
 ```
@@ -212,7 +212,7 @@ same as `example_with`
 ====
 same as
 ```ruby
-contest "description" do
+context "description" do
   ...
 end
 ```
@@ -223,7 +223,7 @@ end
 ====
 same as
 ```ruby
-contest "when value is 1" do
+context "when value is 1" do
   let(:value) { 1 }
   ...
 end
@@ -235,7 +235,7 @@ end
 ====
 same as
 ```ruby
-contest "when logged in" do
+context "when logged in" do
   include_context "logged in"
   ...
 end
@@ -247,7 +247,7 @@ end
 ====
 same as
 ```ruby
-contest "", :bar do
+context "", :bar do
   ...
 end
 ```
@@ -258,7 +258,7 @@ end
 ====
 same as
 ```ruby
-contest "", foo: 1 do
+context "", foo: 1 do
   ...
 end
 ```
