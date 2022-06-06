@@ -11,11 +11,12 @@ jobs:
     name: Release Ruby gem
 
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v2
+      - uses: GoogleCloudPlatform/release-please-action@v3
         id: release
         with:
+          default-branch: temp
           release-type: ruby
-          package-name: release-please-demo
+          package-name: rspec-context_helper
           bump-minor-pre-major: true
           bump-patch-for-minor-pre-major: true
           version-file: "lib/rspec/context_helper/version.rb"
