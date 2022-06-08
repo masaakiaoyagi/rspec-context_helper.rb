@@ -22,6 +22,8 @@ jobs:
           version-file: "lib/rspec/context_helper/version.rb"
 
       - uses: actions/checkout@v3
+        with:
+          ref: release
         if: ${{ steps.release.outputs.release_created }}
 
       - uses: ruby/setup-ruby@v1
