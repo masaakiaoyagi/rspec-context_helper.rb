@@ -1,45 +1,38 @@
-name: release
+name: release-please
 
 on:
   push:
     branches:
-      # - main
       - release
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    name: Release Ruby gem
+
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v2
+      - uses: GoogleCloudPlatform/release-please-action@v3
         id: release
         with:
           default-branch: release
           release-type: ruby
-          # package-name: release-please-demo
           package-name: rspec-context_helper
           bump-minor-pre-major: true
-          # version-file: "lib/release/please/demo/version.rb"
+          bump-patch-for-minor-pre-major: true
           version-file: "lib/rspec/context_helper/version.rb"
 
-      # Checkout code if release was created
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: release
         if: ${{ steps.release.outputs.release_created }}
 
-      # Setup ruby if a release was created
       - uses: ruby/setup-ruby@v1
         with:
-          # ruby-version: 3.0.0
           ruby-version: 3.1.2
+          bundler-cache: true
         if: ${{ steps.release.outputs.release_created }}
 
-      # Bundle install
-      - run: bundle install
-        if: ${{ steps.release.outputs.release_created }}
-
-      # Publish
-      - name: publish gem
+      - name: Publish gem to rubygems.org
         run: |
           mkdir -p $HOME/.gem
           touch $HOME/.gem/credentials
