@@ -61,7 +61,7 @@ gem "rspec-context_helper"
 
 ## Usage
 
- Add the following line to your `spec_helper.rb`:
+Add the following line to your `spec_helper.rb`:
 ```ruby
 require "rspec/context_helper"
 ```
