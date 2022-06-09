@@ -18,7 +18,7 @@ jobs:
           release-type: ruby
           package-name: rspec-context_helper
           bump-minor-pre-major: true
-          bump-patch-for-minor-pre-major: true
+          bump-patch-for-minor-pre-major: false
           version-file: "lib/rspec/context_helper/version.rb"
 
       - uses: actions/checkout@v3
@@ -39,8 +39,7 @@ jobs:
           chmod 0600 $HOME/.gem/credentials
           printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
           gem build *.gemspec
-          ls -l
-          # gem push *.gem
+          gem push *.gem
         env:
           GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_API_KEY}}"
         if: ${{ steps.release.outputs.release_created }}
