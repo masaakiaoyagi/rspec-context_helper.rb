@@ -41,10 +41,12 @@ user ->> main: push
   runner -->> main: collect commits since all latest releases
           Note over runner: update CHANGELOG
     runner -->> pr: create PR
+user ->> gem: disable MFA
 user ->> pr: merge
   pr -->> main: merge PR
   main -->> runner: run release-please workflow
     runner -->> release: create Release
           Note over runner: create gem
           runner -->> gem: publish gem
+user ->> gem: enable MFA
 ```
