@@ -1,0 +1,48 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+      # - release
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    name: Release Ruby gem
+    environment:
+      name: rubygems
+
+    steps:
+      - uses: GoogleCloudPlatform/release-please-action@v3
+        id: release
+        with:
+          # default-branch: release
+          release-type: ruby
+          package-name: rspec-context_helper
+          bump-minor-pre-major: true
+          bump-patch-for-minor-pre-major: false
+          version-file: "lib/rspec/context_helper/version.rb"
+
+      - uses: actions/checkout@v3
+        # with:
+        #   ref: release
+        if: ${{ steps.release.outputs.release_created }}
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Publish gem to rubygems.org
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_API_KEY}}"
+        if: ${{ steps.release.outputs.release_created }}
