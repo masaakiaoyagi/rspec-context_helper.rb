@@ -1,6 +1,6 @@
 # RSpec::ContextHelper
 
-https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#work-in-progress[image:https://img.shields.io/badge/stability-wip-lightgrey.svg[stability-wip]]
+https://github.com/masaakiaoyagi/rspec-context_helper.rb/releases[image:https://img.shields.io/github/v/release/masaakiaoyagi/rspec-context_helper.rb?include_prereleases[GitHub release (latest SemVer including pre-releases)]]
 https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml[image:https://github.com/masaakiaoyagi/rspec-context_helper.rb/actions/workflows/test.yml/badge.svg[test]]
 https://opensource.org/licenses/MIT[image:https://img.shields.io/badge/License-MIT-yellow.svg[License: MIT]]
 https://conventionalcommits.org[image:https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white[Conventional Commits]]
