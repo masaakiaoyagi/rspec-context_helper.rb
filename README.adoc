@@ -54,17 +54,16 @@ example_with(name: "a@a")    { expect(account).to have_error.on(:name).with("alp
 . Add the dependency to your `Gemfile`:
 +
 ```ruby
-group :test do
-  gem "rspec-context_helper"
-end
+gem "rspec-context_helper"
 ```
 
 . Run `bundle install`
 
 ## Usage
 
+ Add the following line to your `spec_helper.rb`:
 ```ruby
-require "rspec-context_helper"
+require "rspec/context_helper"
 ```
 
 See https://github.com/masaakiaoyagi/rspec-context_helper.rb/blob/main/spec/rspec/context_helper_spec.rb[spec] how to write a test.
